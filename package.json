@@ -2,16 +2,46 @@
   "name": "reactron",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Mustafa Taheri",
+    "email": "mustafa.a.taheri@gmail.com"
+  },
+  "build": {
+    "appId": "com.maxscripts.reactron",
+    "productName": "Reactron",
+    "copyright": "Copyright © 2019 ${author}",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "homepage": "./",
+  "main": "./public/electron.js",
   "dependencies": {
+    "concurrently": "^4.1.1",
+    "electron": "^6.0.2",
+    "electron-builder": "^21.2.0",
+    "electron-is-dev": "^1.1.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.1",
+    "wait-on": "^3.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-pack": "npm run build",
+    "electron-pack": "build -mw"
   },
   "eslintConfig": {
     "extends": "react-app"
